@@ -5,21 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
 
 namespace CarreraApp
 {
     internal class AccesoDatos
     {
+
+        private static AccesoDatos instancia;
+
+        private SqlConnection cnn;
+
         SqlConnection coneccion;
         SqlCommand comando;
         string cadenaConexio;
 
-        public AccesoDatos()
+        private AccesoDatos()
         {
-            cadenaConexio = @"Data Source=JUAN-NB\SQLEXPRESS;Initial Catalog=universidad;Integrated Security=True";
-            coneccion = new SqlConnection(cadenaConexio);
-            comando = new SqlCommand();
+            cnn = new SqlConnection(Properties.Resources.cnnString);
         }
+        public static AccesoDatos ObtenerInstancia()
+        {
+            if (instancia == null)
+            { 
+            instancia = new AccesoDatos();
+            }
+            return instancia;
+        }
+
+        //public AccesoDatos()
+        //{
+        //    cadenaConexio = @"Data Source=JUAN-NB\SQLEXPRESS;Initial Catalog=universidad;Integrated Security=True";
+        //    coneccion = new SqlConnection(cadenaConexio);
+        //    comando = new SqlCommand();
+        //}
         private void conectar()
         {
             coneccion.Open();

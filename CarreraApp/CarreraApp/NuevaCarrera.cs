@@ -99,7 +99,9 @@ namespace CarreraApp
             }
         }
 
+        private void btnDesabilitar_Click(object sender, EventArgs e)
+        {
 
-       
+        }
     }
 }
